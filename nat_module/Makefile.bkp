@@ -1,0 +1,32 @@
+
+
+
+
+CONFIG_MODULE_SIG=n
+obj-m += hello.o
+
+kernel_dir = /home/arun/Technexion/linux/modules/build/
+
+native_dir = /lib/modules/$(shell uname -r)/build
+dir = /home/arun/nfs_local/lib/modules/4.1.15-134097-gd220b8b1bcac-dirty/build
+
+.DEFAULT_GOAL=arm
+
+#ARCH ?= arm 
+#CROSS_COMPILE ?= /home/arun/Downloads/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
+
+nat:
+	@echo "ARCH=${ARCH}"
+	@echo "CROSS_COMPILE=${CROSS_COMPILE}"
+	@echo "\n\nMaking module for native system.. \n\n"
+	@echo "\n\nnat_dir: ${native_dir}, PWD: $(PWD)\n\n"
+	@make -C ${native_dir} M=$(PWD) modules
+
+arm:
+	@echo "\n\nMaking module for arm system.. \n\n"
+	@echo "ARCH=$(ARCH)"
+	@echo "CROSS_COMPILE=$(CROSS_COMPILE)"
+	@make  -C ${dir} M=$(PWD) modules
+clean:
+	make -C ${kernel_dir} M=$(PWD) clean 
+	make -C ${native_dir} M=$(PWD) clean

@@ -1,0 +1,1 @@
+cmd_/home/arun/kernel/hello.ko := /home/arun/new/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/arun/kernel/hello.ko /home/arun/kernel/hello.o /home/arun/kernel/hello.mod.o
